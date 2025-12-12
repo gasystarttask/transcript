@@ -1,0 +1,11 @@
+services:
+  whisper:
+    image: ghcr.io/ggml-org/whisper.cpp:main
+    volumes:
+      - ./models:/models
+      - ./media:/media
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["/app/build/bin/whisper-server -m /models/whisper-large-v3-french/ggml-model-q5_0.bin -l fr --port 8080 --host 0.0.0.0"]
